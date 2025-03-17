@@ -3,5 +3,5 @@ torchvision
 torchaudio
 numpy
 datasets
-sklearn
+scikit-learn
 transformers
