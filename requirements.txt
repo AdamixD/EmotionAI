@@ -1,7 +1,10 @@
-torch
+torch==2.5.1
 torchvision
 torchaudio
 numpy
 datasets
 scikit-learn
 transformers
+protobuf
+sacremoses
+accelerate>=0.26.0
