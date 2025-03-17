@@ -5,4 +5,3 @@ numpy
 datasets
 sklearn
 transformers
---index-url https://download.pytorch.org/whl/cu122
