@@ -116,10 +116,11 @@ if __name__ == "__main__":
         callbacks=[EarlyStoppingCallback(early_stopping_patience=3)],
     )
 
+    tokenizer.save_pretrained(RESULTS_DIR)
+
     trainer.train()
 
     trainer.save_model(RESULTS_DIR)
-    tokenizer.save_pretrained(RESULTS_DIR)
 
     final_metrics = trainer.evaluate(tokenized_test_dataset)
     print("Final evaluation on test dataset:", final_metrics)
