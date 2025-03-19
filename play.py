@@ -32,10 +32,10 @@ if __name__ == "__main__":
     print("Enter 'exit' or 'quit' to stop program.\n")
 
     while True:
-        input_sentence = input("Your sentence: ")
+        user_input = input("Your sentence: ")
 
         if user_input.lower() in ["exit", "quit"]:
             print("Program has been stopped.")
             break
 
-        predict_emotion(model, input_sentence)
+        predict_emotion(model, user_input)
