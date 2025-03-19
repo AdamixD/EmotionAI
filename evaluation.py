@@ -69,9 +69,9 @@ if __name__ == "__main__":
 
     if DATASET_TYPE in ("train", "test"):
         if DATASET_TYPE == "train":
-            tokenized_dataset = train_dataset.map(tokenize_function, batched=True)
+            tokenized_dataset = train_dataset.map(lambda x: tokenize_function(x, tokenizer), batched=True)
         elif DATASET_TYPE == "test":
-            tokenized_dataset = test_dataset.map(tokenize_function, batched=True)
+            tokenized_dataset = test_dataset.map(lambda x: tokenize_function(x, tokenizer), batched=True)
 
         trainer = Trainer(model=model)
 
