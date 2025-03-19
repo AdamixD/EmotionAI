@@ -10,8 +10,9 @@ def predict_emotion(model, sentence):
     with torch.no_grad():
         outputs = model(**inputs)
     pred_label = outputs.logits.argmax(dim=-1).item()
-    print("outputs: ", outputs)
-    print("emotion: ", pred_label)
+    print("Emotion: ", label_names[pred_label])
+    print("Emotion (index): ", pred_label)
+    print("Logits: ", outputs.logits)
     return label_names[pred_label]
 
 
