@@ -23,22 +23,25 @@ def query_local_bielik(model, tokenizer, device, prompt, temperature=1.0, max_ne
         }
     ]
 
-    # Dla modelu Bielik-11B-v2.3-Instruct używamy wbudowanej metody apply_chat_template
-    inputs = tokenizer.apply_chat_template(messages, return_tensors="pt").to(device)
+    # 1. Tokenizacja (zwraca najczęściej pojedynczy tensor, np. input_ids)
+    inputs = tokenizer.apply_chat_template(messages, return_tensors="pt")
+    # 2. Przeniesienie na GPU lub CPU (w zależności od device)
+    inputs = inputs.to(device)
+    model.to(device)
 
-    # Generowanie
+    # 3. Generowanie (przekazujemy tensor, nie **inputs!)
     with torch.no_grad():
         output_ids = model.generate(
-            **inputs,
+            inputs,
             max_new_tokens=max_new_tokens,
             do_sample=True,
             temperature=temperature,
             top_p=0.95,
             top_k=50,
-            pad_token_id=tokenizer.eos_token_id  # Na wypadek braku tokenu do pad
+            pad_token_id=tokenizer.eos_token_id
         )
 
-    # Dekodowanie na czytelny tekst
+    # 4. Dekodowanie
     generated_text = tokenizer.decode(output_ids[0], skip_special_tokens=True)
     return generated_text
 
