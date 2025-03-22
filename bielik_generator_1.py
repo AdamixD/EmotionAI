@@ -101,7 +101,7 @@ def main():
 
                 save_response_to_file(response, emotion, local_model_label)
 
-                print(f"Generated sentences ({w} - {words_max} words) for '{emotion}': iteration {i + 1}/{iterations}")
+                print(f"Generated sentences ({w}/{words_max} words) for {emotion}: iteration {i + 1}/{iterations}")
 
 
 if __name__ == "__main__":
