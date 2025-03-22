@@ -10,7 +10,10 @@ def query_local_bielik(model, tokenizer, device, prompt, temperature=1.0, max_ne
     messages = [
         {
             "role": "system",
-            "content": "Odpowiadaj wyłącznie w języku polskim. Każde zdanie ma być w nowej linii i bez numeratorów"
+            "content": "1. Odpowiadaj wyłącznie w języku polskim. "
+                       "2. Każde zdanie ma być w nowej linii i bez numeratorów. "
+                       "3. Nie używaj słów pochodnych od słowa 'Twoja'. "
+                       "4. W odpowiedzi nie może być twoich komentarzy, tylko same zdania."
         },
         {
             "role": "user",
@@ -62,7 +65,7 @@ def main():
 
     local_model_label = "Bielik-11B-v2.3-Instruct"
     temperature = args.temperature
-    max_new_tokens = 200
+    max_new_tokens = 20000
     num_sentences = 50
     iterations = args.iterations
     words_min = 1
@@ -73,12 +76,8 @@ def main():
         for w in range(words_min, words_max + 1):
             for emotion in emotions:
                 prompt = (
-                    f"Napisz kolejne nowe inne unikalne zdania (tylko zdanie! bez numeratorów, tylko od nowej linii) "
-                    f"od {w} do {words_max} słów, które można zaklasyfikować do klasy emocji {emotion}. "
-                    f"({num_sentences} przykładów) - dodaj jeszcze większą różnorodność, ma dotyczyć różnych aspektów "
-                    "życia (pomiń słowa pochodne od \"twoja\") oraz staraj się nie zaczynać zdań od przyimków i "
-                    "spójników - Ale pamiętaj ma nie być numeratorów! Dodatkowo nie chcę pokazanego dodatkowego "
-                    "zwracanego \"reasoning\"!"
+                    f"Napisz {num_sentences} kolejnych unikalnych różnorodnych zdań dotyczących różnych aspektów życia "
+                    f"składających się dokładnie z {w} słów, które można zaklasyfikować do klasy emocji {emotion}."
                 )
 
                 try:
