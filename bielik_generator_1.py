@@ -64,10 +64,10 @@ def main():
     model.to(device)
 
     local_model_label = "Bielik-11B-v2.3-Instruct"
-    temperature = args.temperature
+    temperature = float(args.temperature)
     max_new_tokens = 20000
     num_sentences = 50
-    iterations = args.iterations
+    iterations = int(args.iterations)
     words_min = 1
     words_max = 12
     emotions = ["angry", "disgust", "fear", "happy", "neutral", "sad", "surprise"]
