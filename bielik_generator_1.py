@@ -6,14 +6,69 @@ import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 
+DOMAINS = [
+    "Praca",
+    "Film",
+    "Rozrywka",
+    "Miłość",
+    "Rodzina",
+    "Edukacja",
+    "Sport",
+    "Zdrowie",
+    "Technologia",
+    "Moda",
+    "Podróże",
+    "Kultura",
+    "Religia",
+    "Polityka",
+    "Finanse",
+    "Przyjaźń",
+    "Gotowanie",
+    "Sztuka",
+    "Muzyka",
+    "Literatura",
+    "Ekologia",
+    "Motoryzacja",
+    "Nauka",
+    "Zwierzęta",
+    "Przestępczość",
+    "Gry komputerowe",
+    "Żałoba",
+    "Wychowanie dzieci",
+    "Sfera niecenzuralna",
+    "Biznes",
+    "Architektura",
+    "Przedsiębiorczość",
+    "Samorozwój",
+    "Prawo",
+    "Języki obce",
+    "Historia",
+    "Seksualność",
+    "Internet",
+    "Social media",
+    "Wolontariat",
+    "Dieta i odżywianie",
+    "Uroda",
+    "Produkcja",
+    "Medytacja",
+    "Ogrodnictwo",
+    "Rolnictwo",
+    "Emigracja",
+    "Marzenia i cele życiowe",
+    "Emocje i uczucia",
+]
+
+
 def query_local_bielik(model, tokenizer, device, prompt, temperature=1.0, max_new_tokens=10000):
     messages = [
         {
             "role": "system",
-            "content": "1. Odpowiadaj wyłącznie w języku polskim. "
-                       "2. Każde zdanie ma być w nowej linii i bez numeratorów. "
-                       "3. Nie używaj słów pochodnych od słowa 'Twoja'. "
-                       "4. W odpowiedzi nie może być twoich komentarzy, tylko same zdania."
+            "content": (
+                "1. Odpowiadaj wyłącznie w języku polskim. "
+                "2. Każde zdanie ma być w nowej linii i bez numeratorów. "
+                "3. Nie używaj słów pochodnych od słowa 'Twoja'. "
+                "4. W odpowiedzi nie może być twoich komentarzy, tylko same zdania."
+            )
         },
         {
             "role": "user",
@@ -21,13 +76,21 @@ def query_local_bielik(model, tokenizer, device, prompt, temperature=1.0, max_ne
         }
     ]
 
-    inputs = tokenizer.apply_chat_template(messages, return_tensors="pt")
-    inputs = inputs.to(device)
+    inputs = tokenizer.apply_chat_template(
+        messages,
+        return_tensors="pt",
+        padding=True,
+        truncation=True
+    )
+    input_ids = inputs["input_ids"].to(device)
+    attention_mask = inputs["attention_mask"].to(device)
+
     model.to(device)
 
     with torch.no_grad():
         output_ids = model.generate(
-            inputs,
+            input_ids=input_ids,
+            attention_mask=attention_mask,
             max_new_tokens=max_new_tokens,
             do_sample=True,
             temperature=temperature,
@@ -41,11 +104,11 @@ def query_local_bielik(model, tokenizer, device, prompt, temperature=1.0, max_ne
     return generated_text
 
 
-def save_response_to_file(response, emotion, model_name):
+def save_response_to_file(response, emotion, model_name, words):
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
     directory = os.path.join("data", "raw", emotion, model_name)
     os.makedirs(directory, exist_ok=True)
-    file_path = os.path.join(directory, f"{emotion}_{timestamp}.txt")
+    file_path = os.path.join(directory, f"{emotion}_{words}_{timestamp}.txt")
 
     with open(file_path, 'a', encoding='utf-8') as file:
         file.write(response + "\n")
@@ -73,35 +136,38 @@ def main():
     emotions = ["angry", "disgust", "fear", "happy", "neutral", "sad", "surprise"]
 
     for i in range(iterations):
-        for w in range(words_min, words_max + 1):
+        for words in range(words_min, words_max + 1):
             for emotion in emotions:
-                prompt = (
-                    f"Napisz {num_sentences} kolejnych unikalnych różnorodnych zdań dotyczących różnych aspektów życia "
-                    f"składających się dokładnie z {w} słów, które można zaklasyfikować do klasy emocji {emotion}."
-                )
-
-                try:
-                    response = query_local_bielik(
-                        model=model,
-                        tokenizer=tokenizer,
-                        device=device,
-                        prompt=prompt,
-                        temperature=temperature,
-                        max_new_tokens=max_new_tokens
-                    )
-                except Exception as e:
-                    response = query_local_bielik(
-                        model=model,
-                        tokenizer=tokenizer,
-                        device=device,
-                        prompt=prompt,
-                        temperature=temperature,
-                        max_new_tokens=max_new_tokens
+                for domain in DOMAINS:
+                    prompt = (
+                        f"Napisz {num_sentences} kolejnych unikalnych różnorodnych zdań dotyczących "
+                        f"różnych aspektów z obszaru {domain} składających się dokładnie z {words} słów, "
+                        f"które można zaklasyfikować do klasy emocji {emotion}."
                     )
 
-                save_response_to_file(response, emotion, local_model_label)
+                    try:
+                        response = query_local_bielik(
+                            model=model,
+                            tokenizer=tokenizer,
+                            device=device,
+                            prompt=prompt,
+                            temperature=temperature,
+                            max_new_tokens=max_new_tokens
+                        )
+                    except Exception as e:
+                        response = query_local_bielik(
+                            model=model,
+                            tokenizer=tokenizer,
+                            device=device,
+                            prompt=prompt,
+                            temperature=temperature,
+                            max_new_tokens=max_new_tokens
+                        )
 
-                print(f"Generated sentences ({w}/{words_max} words) for {emotion}: iteration {i + 1}/{iterations}")
+                    save_response_to_file(response, emotion, local_model_label, words)
+
+                    print(f"Generated sentences {emotion} - {words}/{words_max} words for {domain} domain: "
+                          f"iteration {i + 1}/{iterations}")
 
 
 if __name__ == "__main__":
