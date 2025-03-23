@@ -82,6 +82,10 @@ def query_local_bielik(model, tokenizer, device, prompt, temperature=1.0, max_ne
         padding=True,
         truncation=True
     )
+
+    print(type(inputs))
+    print(inputs)
+
     input_ids = inputs["input_ids"].to(device)
     attention_mask = inputs["attention_mask"].to(device)
 
