@@ -129,7 +129,7 @@ def main():
     local_model_label = "Bielik-11B-v2.3-Instruct"
     temperature = float(args.temperature)
     max_new_tokens = 20000
-    num_sentences = 50
+    num_sentences = 25
     iterations = int(args.iterations)
     words_min = 1
     words_max = 12
