@@ -76,20 +76,21 @@ def query_local_bielik(model, tokenizer, device, prompt, temperature=1.0, max_ne
         }
     ]
 
-    inputs = tokenizer.apply_chat_template(
+    if tokenizer.pad_token_id is None:
+        tokenizer.pad_token_id = tokenizer.eos_token_id
+
+    input_ids = tokenizer.apply_chat_template(
         messages,
         return_tensors="pt",
         padding=True,
-        truncation=True
+        truncation=True,
+        max_length=2048,
     )
 
-    print(type(inputs))
-    print(inputs)
+    attention_mask = (input_ids != tokenizer.pad_token_id).long()
 
-    input_ids = inputs["input_ids"].to(device)
-    attention_mask = inputs["attention_mask"].to(device)
-
-    model.to(device)
+    input_ids = input_ids.to(device)
+    attention_mask = attention_mask.to(device)
 
     with torch.no_grad():
         output_ids = model.generate(
@@ -100,7 +101,7 @@ def query_local_bielik(model, tokenizer, device, prompt, temperature=1.0, max_ne
             temperature=temperature,
             top_p=0.95,
             top_k=50,
-            pad_token_id=tokenizer.eos_token_id
+            pad_token_id=tokenizer.pad_token_id
         )
 
     generated_text = tokenizer.decode(output_ids[0], skip_special_tokens=True)
