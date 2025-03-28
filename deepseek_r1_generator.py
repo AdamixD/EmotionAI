@@ -6,6 +6,8 @@ import warnings
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer, GenerationConfig
 
+os.environ["DISABLE_FLASH_ATTN"] = "1"
+
 
 def query_deepseek_r1(model, tokenizer, device, prompt, temperature=0.6, max_new_tokens=8000):
     think_sequence = "<think>\n"
@@ -94,7 +96,8 @@ def main():
             device_map="auto",
             max_memory={i: "22GB" for i in range(torch.cuda.device_count())},
             use_safetensors=True,
-            load_in_4bit=False
+            load_in_4bit=False,
+            use_flash_attention_2=False,
         )
 
         model = torch.compile(model)
