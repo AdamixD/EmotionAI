@@ -33,7 +33,7 @@ class DeepSeekClient:
                             "3. Każde zdanie w nowej linii bez numeracji\n"
                             "4. Unikaj słów: 'Twoja', 'Twój', 'Twoje' i podobnych\n"
                             "5. Wygeneruj dokładnie 50 zdań spełniających kryteria.\n"
-                            "6. Słowa nie we wszytkich zdaniach mają być unikalne lub zastąpione synonimem.\n"
+                            # "6. Słowa nie we wszytkich zdaniach mają być unikalne lub zastąpione synonimem.\n"
                             "7. Nie dodawaj żadnych komentarzy, zwrócone mają być tylko zdania"
                         )
                     },
