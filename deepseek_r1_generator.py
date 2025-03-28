@@ -81,14 +81,18 @@ def main():
     try:
         tokenizer = AutoTokenizer.from_pretrained(
             model_name,
-            trust_remote_code=True
+            trust_remote_code=True,
+            revision="a06b8b7013d2e0c5b274412c685d467a6c4dc8d0"
         )
 
         model = AutoModelForCausalLM.from_pretrained(
             model_name,
-            torch_dtype=torch.bfloat16,
+            torch_dtype=torch.float16,
             trust_remote_code=True,
-            device_map="auto"
+            device_map="auto",
+            load_in_8bit=False,
+            quantization_config=None,
+            revision="a06b8b7013d2e0c5b274412c685d467a6c4dc8d0"
         )
 
     except Exception as e:
@@ -134,7 +138,7 @@ def main():
                     )
 
                 save_response_to_file(response, emotion, local_model_label, words)
-                print(f"Emotion: {emotion} | Words: {words} - {words + 2} | Iteration: {i + 1}/{args.iterations}")
+                print(f"Emotion: {emotion} | Words: ({words} - {words + 2}) | Iteration: {i + 1}/{args.iterations}")
 
 
 if __name__ == "__main__":
