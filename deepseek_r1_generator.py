@@ -36,7 +36,7 @@ def query_deepseek_r1(model, tokenizer, device, prompt, temperature=0.6, max_new
         do_sample=True,
         max_new_tokens=max_new_tokens,
         pad_token_id=tokenizer.eos_token_id,
-        repetition_penalty=1.1,
+        repetition_penalty=1.2,
         forced_decoder_ids=[(i, tid) for i, tid in enumerate(think_tokens)],
         eos_token_id=tokenizer.convert_tokens_to_ids("<|im_end|>")
     )
@@ -75,22 +75,17 @@ def main():
 
     args.temperature = max(0.5, min(args.temperature, 0.7))
 
-    os.environ["DISABLE_FLASH_ATTN"] = "1"
-
     device = "cuda" if torch.cuda.is_available() else "cpu"
     model_name = "deepseek-ai/DeepSeek-R1"
-    revision = "a06b8b7013d2e0c5b274412c685d467a6c4dc8d0"
 
     try:
         tokenizer = AutoTokenizer.from_pretrained(
             model_name,
-            # revision=revision,
             trust_remote_code=True
         )
 
         model = AutoModelForCausalLM.from_pretrained(
             model_name,
-            # revision=revision,
             torch_dtype=torch.float16,
             trust_remote_code=True,
             device_map="auto",
