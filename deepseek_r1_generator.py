@@ -6,8 +6,6 @@ import warnings
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer, GenerationConfig
 
-os.environ["DISABLE_FLASH_ATTN"] = "1"
-
 
 def query_deepseek_r1(model, tokenizer, device, prompt, temperature=0.6, max_new_tokens=8000):
     think_sequence = "<think>\n"
@@ -76,6 +74,8 @@ def main():
     args = parser.parse_args()
 
     args.temperature = max(0.5, min(args.temperature, 0.7))
+
+    os.environ["DISABLE_FLASH_ATTN"] = "1"
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
     model_name = "deepseek-ai/DeepSeek-R1"
