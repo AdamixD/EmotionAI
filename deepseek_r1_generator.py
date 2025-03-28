@@ -82,13 +82,13 @@ def main():
     try:
         tokenizer = AutoTokenizer.from_pretrained(
             model_name,
-            revision=revision,
+            # revision=revision,
             trust_remote_code=True
         )
 
         model = AutoModelForCausalLM.from_pretrained(
             model_name,
-            revision=revision,
+            # revision=revision,
             torch_dtype=torch.float16,
             trust_remote_code=True,
             device_map="auto",
