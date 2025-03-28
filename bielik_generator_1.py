@@ -6,60 +6,7 @@ import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 
-DOMAINS = [
-    "Praca",
-    "Film",
-    "Rozrywka",
-    "Miłość",
-    "Rodzina",
-    "Edukacja",
-    "Sport",
-    "Zdrowie",
-    "Technologia",
-    "Moda",
-    "Podróże",
-    "Kultura",
-    "Religia",
-    "Polityka",
-    "Finanse",
-    "Przyjaźń",
-    "Gotowanie",
-    "Sztuka",
-    "Muzyka",
-    "Literatura",
-    "Ekologia",
-    "Motoryzacja",
-    "Nauka",
-    "Zwierzęta",
-    "Przestępczość",
-    "Gry komputerowe",
-    "Żałoba",
-    "Wychowanie dzieci",
-    "Sfera niecenzuralna",
-    "Biznes",
-    "Architektura",
-    "Przedsiębiorczość",
-    "Samorozwój",
-    "Prawo",
-    "Języki obce",
-    "Historia",
-    "Seksualność",
-    "Internet",
-    "Social media",
-    "Wolontariat",
-    "Dieta i odżywianie",
-    "Uroda",
-    "Produkcja",
-    "Medytacja",
-    "Ogrodnictwo",
-    "Rolnictwo",
-    "Emigracja",
-    "Marzenia i cele życiowe",
-    "Emocje i uczucia",
-]
-
-
-def query_local_bielik(model, tokenizer, device, prompt, temperature=1.0, max_new_tokens=10000):
+def query_local_bielik(model, tokenizer, device, prompt, temperature=0.7, max_new_tokens=10000):
     messages = [
         {
             "role": "system",
@@ -143,36 +90,35 @@ def main():
     for i in range(iterations):
         for words in range(words_min, words_max + 1):
             for emotion in emotions:
-                for domain in DOMAINS:
-                    prompt = (
-                        f"Napisz {num_sentences} kolejnych unikalnych różnorodnych zdań dotyczących "
-                        f"różnych aspektów z obszaru {domain} składających się dokładnie z {words} słów, "
-                        f"które można zaklasyfikować do klasy emocji {emotion}."
+                prompt = (
+                    f"Napisz {num_sentences} kolejnych unikalnych różnorodnych zdań dotyczących "
+                    f"różnych dziedzin i obszarów życia ludzi i zwierząt składających się dokładnie "
+                    f"od {words} do {words + 2} słów, które można zaklasyfikować do klasy emocji {emotion}."
+                )
+
+                try:
+                    response = query_local_bielik(
+                        model=model,
+                        tokenizer=tokenizer,
+                        device=device,
+                        prompt=prompt,
+                        temperature=temperature,
+                        max_new_tokens=max_new_tokens
+                    )
+                except Exception as e:
+                    response = query_local_bielik(
+                        model=model,
+                        tokenizer=tokenizer,
+                        device=device,
+                        prompt=prompt,
+                        temperature=temperature,
+                        max_new_tokens=max_new_tokens
                     )
 
-                    try:
-                        response = query_local_bielik(
-                            model=model,
-                            tokenizer=tokenizer,
-                            device=device,
-                            prompt=prompt,
-                            temperature=temperature,
-                            max_new_tokens=max_new_tokens
-                        )
-                    except Exception as e:
-                        response = query_local_bielik(
-                            model=model,
-                            tokenizer=tokenizer,
-                            device=device,
-                            prompt=prompt,
-                            temperature=temperature,
-                            max_new_tokens=max_new_tokens
-                        )
+                save_response_to_file(response, emotion, local_model_label, words)
 
-                    save_response_to_file(response, emotion, local_model_label, words)
-
-                    print(f"Generated sentences {emotion} - {words}/{words_max} words for {domain} domain: "
-                          f"iteration {i + 1}/{iterations}")
+                print(f"Generated sentences {emotion} - {words}/{words_max} words: "
+                      f"iteration {i + 1}/{iterations}")
 
 
 if __name__ == "__main__":

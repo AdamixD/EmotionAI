@@ -8,3 +8,6 @@
 
 
 f"Napisz {num_sentences} kolejnych unikalnych różnorodnych zdań dotyczących różnych aspektów życia składających się dokładnie z {w} słów, które można zaklasyfikować do klasy emocji {emotion}."
+
+
+f"Napisz {num_sentences} kolejnych unikalnych różnorodnych zdań dotyczących różnych aspektów życia składających się dokładnie od {w} do {w + 2} słów, które można zaklasyfikować do klasy emocji {emotion}."
