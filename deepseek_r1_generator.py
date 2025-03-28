@@ -77,23 +77,28 @@ def main():
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
     model_name = "deepseek-ai/DeepSeek-R1"
+    revision = "a06b8b7013d2e0c5b274412c685d467a6c4dc8d0"
 
     try:
         tokenizer = AutoTokenizer.from_pretrained(
             model_name,
-            trust_remote_code=True,
-            revision="a06b8b7013d2e0c5b274412c685d467a6c4dc8d0"
+            revision=revision,
+            trust_remote_code=True
         )
 
         model = AutoModelForCausalLM.from_pretrained(
             model_name,
+            revision=revision,
             torch_dtype=torch.float16,
             trust_remote_code=True,
             device_map="auto",
-            load_in_8bit=False,
-            quantization_config=None,
-            revision="a06b8b7013d2e0c5b274412c685d467a6c4dc8d0"
+            max_memory={i: "22GB" for i in range(torch.cuda.device_count())},
+            use_safetensors=True,
+            load_in_4bit=False
         )
+
+        model = torch.compile(model)
+        torch.backends.cuda.enable_flash_sdp(True)
 
     except Exception as e:
         raise RuntimeError(f"Error during loading model {model_name}: {str(e)}")
