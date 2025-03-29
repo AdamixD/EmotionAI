@@ -65,6 +65,8 @@ def save_response(response, emotion, model_name, words):
 
 
 def main():
+    start_time = time.time()
+
     parser = argparse.ArgumentParser()
     parser.add_argument("--api-key", required=True, help="Klucz API DeepSeek")
     parser.add_argument("--model", choices=["v3", "r1"], default="v3", help="Wersja modelu (v3/r1)")
@@ -97,11 +99,22 @@ def main():
                 )
 
                 if not response or len(response.split('\n')) < 30:
-                    print(f"Otrzymano niepełną odpowiedź dla {emotion}, {words} słów")
+                    print(f"Received incomplete response for {emotion}, {words} words")
                     continue
 
+                elapsed_time = time.time() - start_time
+                hours = int(elapsed_time // 3600)
+                remaining_seconds = elapsed_time % 3600
+                minutes = int(remaining_seconds // 60)
+                seconds = int(remaining_seconds % 60)
+
                 save_response(response, emotion, f"DeepSeek-{args.model.upper()}", words)
-                print(f"Emocja: {emotion} | Słowa: {words}-{words + 2} | Iteracja: {i + 1}/{args.iterations}")
+                print(
+                    f"Emotion: {emotion.ljust(7)} | "
+                    f"Words: {words}-{words + 2} | "
+                    f"Iteration: {str(i + 1).rjust(len(str(args.iterations)))}/{args.iterations} | "
+                    f"Execution time: {str(hours).rjust(2)}h {str(minutes).rjust(2)}m {str(seconds).rjust(2)}s"
+                )
 
                 time.sleep(1)
 
