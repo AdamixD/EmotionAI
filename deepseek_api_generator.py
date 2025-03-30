@@ -110,7 +110,7 @@ def main():
 
                 save_response(response, emotion, f"DeepSeek-{args.model.upper()}", words)
                 print(
-                    f"Emotion: {emotion.ljust(7)} | "
+                    f"Emotion: {emotion.ljust(8)} | "
                     f"Words: {words}-{words + 2} | "
                     f"Iteration: {str(i + 1).rjust(len(str(args.iterations)))}/{args.iterations} | "
                     f"Execution time: {str(hours).rjust(2)}h {str(minutes).rjust(2)}m {str(seconds).rjust(2)}s"
