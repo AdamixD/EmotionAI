@@ -98,8 +98,9 @@ def main():
                     max_tokens=8000,
                 )
 
-                if not response or len(response.split('\n')) < 30:
-                    print(f"Received incomplete response for {emotion}, {words} words")
+                lines = len(response.split('\n'))
+                if not response or lines < 30:
+                    print(f"Received incomplete response for {emotion}, {lines} lines")
                     continue
 
                 elapsed_time = time.time() - start_time
@@ -112,6 +113,7 @@ def main():
                 print(
                     f"Emotion: {emotion.ljust(8)} | "
                     f"Words: {words}-{words + 2} | "
+                    f"Lines: {lines} | "
                     f"Iteration: {str(i + 1).rjust(len(str(args.iterations)))}/{args.iterations} | "
                     f"Execution time: {str(hours).rjust(2)}h {str(minutes).rjust(2)}m {str(seconds).rjust(2)}s"
                 )
