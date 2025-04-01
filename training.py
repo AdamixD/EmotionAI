@@ -65,6 +65,9 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+    os.environ["NCCL_P2P_DISABLE"] = "1"
+    os.environ["NCCL_IB_DISABLE"] = "1"
+    torch.backends.cudnn.benchmark = True
     torch.cuda.empty_cache()
 
     MODEL_NAME = 'allegro/herbert-base-cased'
