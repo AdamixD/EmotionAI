@@ -14,10 +14,10 @@ from transformers import (
 )
 
 
-def load_data(data_path):
+def load_data(data_path, data_generator):
     texts, labels, label_names = [], [], []
     for idx, emotion_dir in enumerate(sorted(os.listdir(data_path))):
-        emotion_path = os.path.join(data_path, emotion_dir, 'gpt-4o')
+        emotion_path = os.path.join(data_path, emotion_dir, data_generator)
         label_names.append(emotion_dir)
         filename = f"{emotion_dir}.txt"
         file_path = os.path.join(emotion_path, filename)
@@ -73,10 +73,11 @@ if __name__ == "__main__":
     MODEL_NAME = 'allegro/herbert-base-cased'
     RESULTS_DIR = f"./results_{args.model_name}"
     DATA_PATH = './data/unrefined'
+    DATA_GENERATOR = 'DeepSeek-V3'
     # DATA_PATH = './data/unrefined_reduced'
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-    texts, labels, label_names = load_data(DATA_PATH)
+    texts, labels, label_names = load_data(DATA_PATH, DATA_GENERATOR)
 
     dataset = Dataset.from_dict({'text': texts, 'label': labels})
     dataset = dataset.cast_column("label", ClassLabel(num_classes=len(label_names), names=label_names))
