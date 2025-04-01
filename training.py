@@ -83,12 +83,15 @@ if __name__ == "__main__":
     tokenized_train_dataset = dataset["train"].map(tokenize_function, batched=True)
     tokenized_test_dataset = dataset["test"].map(tokenize_function, batched=True)
 
-    model = AutoModelForSequenceClassification.from_pretrained(MODEL_NAME, num_labels=len(label_names)).to(device)
+    model = AutoModelForSequenceClassification.from_pretrained(
+        MODEL_NAME,
+        num_labels=len(label_names),
+        ignore_mismatched_sizes=True
+    ).to(device)
 
     training_args = TrainingArguments(
         output_dir=RESULTS_DIR,
-        do_eval=True,
-        eval_strategy="epoch",
+        evaluation_strategy="epoch",
         save_strategy="epoch",
         learning_rate=2e-5,
         gradient_accumulation_steps=4,
@@ -100,11 +103,12 @@ if __name__ == "__main__":
         metric_for_best_model="f1",
         greater_is_better=True,
         logging_dir='./logs',
-        fp16=True,
+        fp16=torch.cuda.is_available(),
         lr_scheduler_type="linear",
         warmup_steps=100,
         logging_strategy="epoch",
-        seed=42
+        seed=42,
+        report_to="none"
     )
 
     trainer = DynamicEvalTrainer(
