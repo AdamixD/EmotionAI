@@ -1,0 +1,33 @@
+Jakiś czas temu rezerwowałem hotel w jednym z popularnych serwisów.
+Jeden pokój dla mnie i żony, drugi dla teścia, który leci z nami.
+Jeśli wrzucam do koszyka oba pokoje i płacę za nie razem, mam zniżkę z tytułu rezerwacji dwóch pokoi w tym samym hotelu.
+Ale wtedy pojawia się pierwszy zgrzyt.
+Przy każdym pokoju trzeba podać nazwisko co najmniej jednej osoby, która będzie w tym pokoju nocować.
+To nie byłby problem, gdyby portal miał opcję dania osobnych danych dla każdego pokoju.
+Na tym portalu jednak technicznie możliwe jest podanie tylko jednego, wspólnego nazwiska dla wszystkich pokoi.
+Podałem więc moje nazwisko, po czym wszystko zatwierdziłem.
+Płatność miała być ściągnięta z karty tydzień przed terminem noclegu.
+Po otrzymaniu potwierdzenia rezerwacji od razu wszedłem w rezerwację pokoju dla teścia i zmieniłem nazwisko lokatora na nazwisko teścia.
+I się zaczęło...
+Zmiana została zaakceptowana, ale rezerwacja była na etapie procesowania, a nie jak w przypadku mojego pokoju, że wszystko ok i można przyjeżdżać.
+Po kilku dniach otrzymałem wiadomość, że w celu przeprocesowania tej zmiany (przypominam, chodziło o zmianę nazwiska gościa) muszę opłacić ten pokój już teraz.
+Wszedłem więc na portal i dobre pół godziny szukałem opłacenia tej rezerwacji, ale nigdzie tego nie znalazłem.
+W samej rezerwacji wciąż były informacje mojej karty i komunikat, że opłata zostanie ściągnięta na tydzień przed noclegiem.
+W związku z tym najpierw chciałem skontaktować się z obsługą.
+Na stronie nigdzie nie ma kontaktu telefonicznego, jedynie Live chat.
+Pierwsze pytanie - podaj numer rezerwacji.
+Podałem numer rezerwacji i oberwałem komunikatem w stylu wystąpił błąd, nie możemy przetworzyć tej rezerwacji. skontaktuj się telefonicznie.
+Ale nigdzie nie ma telefonu do kontaktu...
+Odpisałem więc na maila, opisałem całą sytuacją.
+Po dniach otrzymałem odpowiedź, że nie mogli autoryzować płatności i żebym podał telefonicznie dane karty.
+Tym razem w mailu był numer telefonu, na który mam dzwonić.
+Odpisałem im, że nie mogę tego zrobić, bo jest to niezgodne z regulaminem mojego banku.
+Mógłbym zmienić dane karty na stronie, gdyby była taka opcja, ale wiem, że podane dane są poprawne i mogliby przecież ponownie spróbować pobrać opłatę...
+Po kilku dniach dostałem odpowiedź, że nadal nie mogą autoryzować płatności i żebym w portalu z poziomu rezerwacji podał jeszcze raz dane karty.
+Tyle że... w portalu nie ma takiej opcji - ani w rezerwacji, ani nigdzie indziej nie ma pola, przycisku, formularza umożliwiającego ponowne wprowadzenie danych karty.
+Wkurzyłem się i postanowiłem anulować teściowi rezerwację i ponownie zabukować mu pokój, nawet gdyby miało wyjść drożej.
+Ale ponieważ ta rezerwacja była procesowana, anulowanie było niemożliwe.
+Zrobiłem więc drugą rezerwację dla teścia (która wyszła taniej niż pierwotna ze zniżką) i napisałem w odpowiedzi na poprzedniego maila, by pierwotną rezerwację usunęli.
+Na szczęście byli na tyle kompetentni, że ta czynność została wykonana bezproblemowo.
+To, że portal jest kiepsko zaprojektowany, to jedno.
+Ale że obsługa na różnych etapach prosi mnie o wykonanie czynności, których nie da się wykonać (zadzwoń pod numer, którego nie znasz; wprowadź dane karty w miejscu, w którym nie możesz wprowadzić tych danych) to już dla mnie absurd.
