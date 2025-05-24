@@ -1,0 +1,23 @@
+Jestem mechanikiem pojazdowym, specjalizuję się w elektronice i elektryce.
+Rok temu przeprowadziłem się do innej miejscowości i od kopa znalazłem pracę w małym punkcie, ale serwisowali lokalne nawet super fury.
+Pracowałem, robiłem swoje, wszystko w porządku.
+Jakiś miesiąc temu odkryłem przy serwisie Panamery mały dynks... bo inaczej nie umiałem tego wtedy nazwać.
+Jego nie powinno tam być, przejrzałem schematy elektryczne itp.
+Panamera przyjechała z choinką na desce, czujniki jakby były niesprawne co dziwne w ilości hurtowej, to się nie zdarza.
+Wylutowałem tego dynksa i jak ręką odjął wszystkie błędy zniknęły.
+Myślę co to za cholerstwo, dzwonię do klienta gdzie wcześniej autko było robione bo widać, że ktoś tam grzebał.
+Gość mówi, że u nas.
+Zabrałem dynksa do domu, pomierzyłem, spiąłem u siebie i szczena mi opadła.
+To mikroukład używany do symulowania błędów fantomowych i takich używa się, ale na etapie projektowania samochodu i jego testowania i lub sporządzania know how dla przyszłych diagnostów.
+Idę z tym do szefa i mówię, że jest lipa, w międzyczasie przyjechał inny samochód - citroen naszpikowany elektroniką i ten sam dynks, więc miałem dwa dynksy.
+Dopiero wtedy wyszło, że te młotki mają tego całe pudła i montują w samochodach aby potem właśnie kosić bułę.
+Za to naprawę mogli krzyczeć ile chcieli, czujniki to droga sprawa i wymieniałem to co wygląda na sprawne, na sprawne.
+Zawsze robiłem w parze z synem właściciela i mikroukład można było sterować radiowo, ale jak się rozchorował, to miałem mieć nadzór szefa, którego nie było w pobliżu.
+Mikroukład miał egzotyczną częstotliwość i tylko ta go wyłączała lub włączała lub generowała losowy błąd lub zaprogramowany.
+Za naprawę panamerki wystawili typowi zł za jedno kliknięcie.
+Z roboty odszedłem sam bo to już grube oszustwo, a teraz mi wysyłają wiadomości, ze jak się wygadam komuś, to mi chatę spalą.
+No i jestem bezrobotny, bo w okolicy nie ma innych elektryków-elektroników.
+Sądząc po ilościach w pudłach (jak już przeszukałem zaplecze) tego były setki to ile jest zamontowanych?
+Tego nie da się sprawdzić, znaleźć można przez czysty przypadek.
+To kosteczka wielkości 10x10mm wygląda jak zapinka elementów plastikowych.
+Mam mętlik we łbie, że tak można ludzi kantować. warsztat samochodowy
